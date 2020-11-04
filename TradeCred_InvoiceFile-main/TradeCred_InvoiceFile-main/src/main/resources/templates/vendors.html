@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+<h2>FileUpload</h2>
+<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${successmessage}">
+  <strong th:text="${successmessage}"></strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error}">
+  <strong th:text="${error}"></strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+<form action="" th:action="@{'/fileupload'}" th:object="${vendor}" method="post" enctype='multipart/form-data'>
+  <div class="form-group">
+    <label for="fileupload">File Upload(Excel or CSV or JSON)</label>
+    <input type="file" class="form-control"  id="file" name="file" th:field="*{file}"> 
+  </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+<div class="col-md-12">
+<h2>All Vendors</h2>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>InvoiceNumbers</th>
+        <th>DocumentNumber</th>
+        <th>Type</th>
+	      <th>Amtinloccur</th>
+        <th>VendorCode</th>
+        <th>Vendorname</th>
+        <th>Vendortype</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="vendor :${vendors}">
+       <td th:text="${vendor.invoicenumber}"></td>
+      <td th:text="${vendor.documentnumber}"></td>
+      <td th:text="${vendor.type}"></td>
+      <td th:text="${vendor.amtinloccur}"></td>
+      <td th:text="${vendor.vendorcode}"></td>
+      <td th:text="${vendor.vendorname}"></td>
+      <td th:text="${vendor.vendortype}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>
